@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 
 // Constante com todas as questões extraídas das imagens
 const questions = [
-  { id: 1, q: "Selecione a alternativa que contém o nome de cada perda do passivo (TAP):", options: ["A-Derivação; B-Inserção; C-Isolação", "A-Inserção; B-Isolação; C-Derivação", "A-Inserção; B-Derivação; C-Isolação", "A-Isolação; B-Inserção; C-Derivação"], ans: 2 },
+{ 
+    id: 1, 
+    q: "Selecione a alternativa que contém o nome de cada perda do passivo (TAP):", 
+    image: "/src/assets/dc.png", 
+    options: ["A-Derivação; B-Inserção; C-Isolação", "A-Inserção; B-Isolação; C-Derivação", "A-Inserção; B-Derivação; C-Isolação", "A-Isolação; B-Inserção; C-Derivação"], 
+    ans: 2 
+  },
   { id: 2, q: "Qual a finalidade da pingadeira?", options: ["Estética da instalação", "Reserva técnica", "Ocasionar infiltração", "Evitar infiltração de água através do cabo"], ans: 3 },
   { id: 3, q: "Quais as partes que compõem um cabo de Fibra Óptica?", options: ["Capa protetora", "Núcleo", "Casca", "Todas as alternativas acima"], ans: 3 },
   { id: 4, q: "O que é Canal Direto?", options: ["Sinal do cliente até o Headend", "Sinal entre clientes", "Sinal do Headend até o cliente", "Sinal entre Headends"], ans: 2 },
@@ -33,7 +39,6 @@ export default function App() {
   const handleAnswer = (index) => {
     const isCorrect = index === questions[currentQuestion].ans;
     if (isCorrect) setScore(score + 1);
-
     setUserAnswers([...userAnswers, { qIndex: currentQuestion, selected: index, correct: isCorrect }]);
 
     const next = currentQuestion + 1;
@@ -59,7 +64,7 @@ export default function App() {
         {!showResult && (
           <div className="p-6 bg-slate-700/50 border-b border-slate-600">
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-xl font-bold text-blue-400">Simulado Técnico Claro</h1>
+              <h1 className="text-xl font-bold text-blue-400">Simulado Técnico</h1>
               <span className="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full text-xs font-mono">
                 {currentQuestion + 1} / {questions.length}
               </span>
@@ -76,45 +81,38 @@ export default function App() {
         <div className="p-8">
           {showResult ? (
             <div className="text-center">
-              <div className="mb-6">
-                <h2 className="text-3xl font-bold mb-2">Simulado Finalizado!</h2>
-                <p className="text-slate-400">Veja seu desempenho abaixo:</p>
-              </div>
-              
-              <div className="inline-block p-6 rounded-full bg-slate-700 mb-8 border-4 border-blue-500">
+              <h2 className="text-3xl font-bold mb-2">Simulado Finalizado!</h2>
+              <div className="inline-block p-6 rounded-full bg-slate-700 my-8 border-4 border-blue-500">
                 <span className="text-5xl font-black">{Math.round((score / questions.length) * 100)}%</span>
               </div>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-green-900/30 p-4 rounded-xl border border-green-700/50 text-green-400">
-                  <p className="text-sm uppercase font-bold">Acertos</p>
-                  <p className="text-2xl font-bold">{score}</p>
-                </div>
-                <div className="bg-red-900/30 p-4 rounded-xl border border-red-700/50 text-red-400">
-                  <p className="text-sm uppercase font-bold">Erros</p>
-                  <p className="text-2xl font-bold">{questions.length - score}</p>
-                </div>
-              </div>
-
-              <button 
-                onClick={restart}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20"
-              >
+              <button onClick={restart} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all">
                 Tentar Novamente
               </button>
             </div>
           ) : (
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-2xl font-semibold mb-8 text-slate-100 leading-tight">
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
+              
+              {/* TÍTULO DA QUESTÃO */}
+              <h2 className="text-2xl font-semibold mb-6 text-slate-100 leading-tight">
                 {questions[currentQuestion].q}
               </h2>
+
+              {/* IMAGEM DA QUESTÃO (SE EXISTIR) */}
+              {questions[currentQuestion].image && (
+                <img 
+                  src={questions[currentQuestion].image} 
+                  alt="Diagrama" 
+                  className="mb-8 rounded-lg border border-slate-600 max-w-full h-auto mx-auto shadow-lg"
+                />
+              )}
               
-              <div className="space-y-4">
+              {/* OPÇÕES */}
+              <div className="space-y-4 text-left">
                 {questions[currentQuestion].options.map((opt, i) => (
                   <button 
                     key={i} 
                     onClick={() => handleAnswer(i)}
-                    className="w-full group flex items-center p-5 rounded-xl border-2 border-slate-700 hover:border-blue-500 hover:bg-slate-700/50 transition-all text-left"
+                    className="w-full group flex items-center p-5 rounded-xl border-2 border-slate-700 hover:border-blue-500 hover:bg-slate-700/50 transition-all"
                   >
                     <span className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-700 group-hover:bg-blue-600 group-hover:text-white mr-4 font-bold transition-colors">
                       {String.fromCharCode(65 + i)}
