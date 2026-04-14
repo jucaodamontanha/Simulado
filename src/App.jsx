@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import imagemTap from './assets/dc.png';
 
 // Constante com todas as questões extraídas das imagens
 const questions = [
 { 
     id: 1, 
     q: "Selecione a alternativa que contém o nome de cada perda do passivo (TAP):", 
-    image: "/src/assets/dc.png", 
+    image: imagemTap, // 2. Use a variável em vez da string do caminho
     options: ["A-Derivação; B-Inserção; C-Isolação", "A-Inserção; B-Isolação; C-Derivação", "A-Inserção; B-Derivação; C-Isolação", "A-Isolação; B-Inserção; C-Derivação"], 
     ans: 2 
   },
