@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import imagemTap from './assets/dc.png';
 
-// --- BANCO DE DADOS UNIFICADO ---
-const quiz1 = [
-  { 
+// Constante com todas as questões extraídas das imagens
+const questions = [
+{ 
     id: 1, 
     q: "Selecione a alternativa que contém o nome de cada perda do passivo (TAP):", 
-    image: imagemTap, 
+    image: imagemTap, // 2. Use a variável em vez da string do caminho
     options: ["A-Derivação; B-Inserção; C-Isolação", "A-Inserção; B-Isolação; C-Derivação", "A-Inserção; B-Derivação; C-Isolação", "A-Isolação; B-Inserção; C-Derivação"], 
     ans: 2 
   },
@@ -26,32 +26,22 @@ const quiz1 = [
   { id: 15, q: "Qual a principal vantagem do DOCSIS 3.1?", options: ["Usa apenas cobre", "Velocidades Giga e blocos OFDM", "Funciona sem energia", "Apenas para TV analógica"], ans: 1 },
   { id: 16, q: "O que caracteriza um curto-circuito no coaxial?", options: ["Malha encostando no condutor central", "Cabo muito comprido", "Conector sujo", "Sinal baixo"], ans: 0 },
   { id: 17, q: "O que deve ser feito se houver ruído (Ingresso) no cliente?", options: ["Ignorar", "Instalar Filtro de Alta / Revisar conectores", "Aumentar transmissão do modem", "Trocar o cabo da rua"], ans: 1 },
-];
+  
 
-const quiz2 = [
-  { id: 18, q: "Qual das opções representa uma prática correta ao montar o conector RG6?", options: ["Evitar contato entre malha e condutor central", "Emitir alertas automáticos sobre quedas de energia na rede elétrica", "Deixar o dielétrico exposto", "Não descascar a blindagem"], ans: 0 },
-  { id: 19, q: "Qual é a principal função da funcionalidade “Certidão de Atendimento” no aplicativo Técnico Nota 10?", options: ["Monitorar o uso de dados dos clientes em tempo real", "O número de série do TAP", "Fornecer relatórios administrativos sobre o desempenho dos técnicos", "Realizar a leitura e análise das frequências de canais digitais como Upstream, Downstream, OFDM e OFDMA"], ans: 3 },
-  { id: 20, q: "O que é ruído?", options: ["É uma forma de amplificar o sinal", "É uma forma que o equipamento entende o sinal em alta qualidade", "Ruído é uma interferência vinda de fontes externas que ingressa na instalação e causa defeito nos produtos instalados", "É uma forma de transmitir o sinal ao Headend"], ans: 2 },
-  { id: 21, q: "Qual é o padrão de funcionamento do RX nos terminais (Decodificadores e eMTAs)?", options: ["Entre +20dBmV e -20dBmV", "Entre +12dBmV e -12dBmV", "Entre +5dBmV e -5dBmV", "Entre +15dBmV e -15dBmV"], ans: 1 },
-  { id: 22, q: "Qual é o padrão de funcionamento do TX nos terminais (Decodificadores e eMTAs)?", options: ["Entre 27dBmV e 57dBmV", "Entre 35dBmV e 55dBmV", "Entre 38dBmV e 51dBmV", "Entre +10dBmV e -10dBmV"], ans: 2 },
-  { id: 23, q: "Qual é o padrão de funcionamento do SNR Down e SNR Up nos terminais (Decodificadores e eMTAs)?", options: ["SNR Down abaixo de 27dB e SNR Up abaixo de 15dB", "SNR Down acima de 35dB e SNR Up acima de 27dB", "SNR Down abaixo de 35dB e SNR Up abaixo de 27dB", "SNR Down entre 20dB e 30dB e SNR Up entre 17dB e 22dB"], ans: 1},
-  { id: 24, q: "É possível efetuar a medição de níveis de sinal pelo seu próprio smartphone. Basta acessar um site. Qual é o site usado para medição de níveis?", options: ["sinais.claro.virtua.com", "medidordesinal.com.br", "niveis.virtua.com.br", "datacenter.virtua.com"], ans: 2 },
-  { id: 25, q: "Qual é a atenuação de um divisor three way balanceado?", options: ["6dB em todas as portas", "8dB em todas as portas", "4,5dB em todas as portas", "Não existe atenuação neste divisor"], ans: 0 },
-  { id: 26, q: "Para que os canais da grade QAM funcionem corretamente em terminais híbridos, qual configuração é essencial?", options: ["Instalar apenas o cabo coaxial e executar a varredura de canais na configuração", "Conectar o terminal somente à internet e configurar a senha de conteúdos", "Instalar o cabo coaxial, conectar à internet e executar a varredura de canais", "Conectar o terminal somente à internet e executar o valida retorno"], ans: 2 },
-  { id: 27, q: "Ao realizar a instalação do serviço de TV é necessário efetuar o Valida Retorno. Qual é a função deste teste?", options: ["Habilitar todos os serviços do canal direto", "Realizar a validação do canal de retorno do decoder com o Headend", "Validar o pacote do cliente", "Liberar os canais do pacote"], ans: 1 }
+  
 ];
 
 export default function App() {
-  const [selectedQuiz, setSelectedQuiz] = useState(null); // null, 'quiz1' ou 'quiz2'
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
-
-  // Define qual lista de questões usar
-  const questions = selectedQuiz === 'quiz1' ? quiz1 : quiz2;
+  const [userAnswers, setUserAnswers] = useState([]);
 
   const handleAnswer = (index) => {
-    if (index === questions[currentQuestion].ans) setScore(score + 1);
+    const isCorrect = index === questions[currentQuestion].ans;
+    if (isCorrect) setScore(score + 1);
+    setUserAnswers([...userAnswers, { qIndex: currentQuestion, selected: index, correct: isCorrect }]);
+
     const next = currentQuestion + 1;
     if (next < questions.length) {
       setCurrentQuestion(next);
@@ -60,51 +50,23 @@ export default function App() {
     }
   };
 
-  const resetAll = () => {
-    setSelectedQuiz(null);
+  const restart = () => {
     setCurrentQuestion(0);
     setScore(0);
     setShowResult(false);
+    setUserAnswers([]);
   };
 
-  // --- TELA DE SELEÇÃO ---
-  if (!selectedQuiz) {
-    return (
-      <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl text-center">
-          <h1 className="text-3xl font-bold text-blue-400 mb-8">Simulados Técnicos</h1>
-          <div className="space-y-4">
-            <button 
-              onClick={() => setSelectedQuiz('quiz1')}
-              className="w-full bg-slate-700 hover:bg-blue-600 p-6 rounded-xl border border-slate-600 font-bold transition-all"
-            >
-              🚀 Simulado 1 (Básico/HFC)
-            </button>
-            <button 
-              onClick={() => setSelectedQuiz('quiz2')}
-              className="w-full bg-slate-700 hover:bg-blue-600 p-6 rounded-xl border border-slate-600 font-bold transition-all"
-            >
-              🛠️ Simulado 2 (Técnico/App)
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // --- TELA DO SIMULADO ---
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 flex items-center justify-center">
+    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 font-sans flex items-center justify-center">
       <div className="max-w-2xl w-full bg-slate-800 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
         
+        {/* Header com Progresso */}
         {!showResult && (
           <div className="p-6 bg-slate-700/50 border-b border-slate-600">
             <div className="flex justify-between items-center mb-4">
-              <button onClick={resetAll} className="text-sm text-slate-400 hover:text-white">← Voltar</button>
-              <h1 className="text-xl font-bold text-blue-400">
-                {selectedQuiz === 'quiz1' ? 'Simulado 1' : 'Simulado 2'}
-              </h1>
-              <span className="text-xs font-mono bg-blue-900/50 px-2 py-1 rounded">
+              <h1 className="text-xl font-bold text-blue-400">Simulado Técnico</h1>
+              <span className="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full text-xs font-mono">
                 {currentQuestion + 1} / {questions.length}
               </span>
             </div>
@@ -124,24 +86,28 @@ export default function App() {
               <div className="inline-block p-6 rounded-full bg-slate-700 my-8 border-4 border-blue-500">
                 <span className="text-5xl font-black">{Math.round((score / questions.length) * 100)}%</span>
               </div>
-              <button onClick={resetAll} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all">
-                Ir para Início
+              <button onClick={restart} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all">
+                Tentar Novamente
               </button>
             </div>
           ) : (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
+              
+              {/* TÍTULO DA QUESTÃO */}
               <h2 className="text-2xl font-semibold mb-6 text-slate-100 leading-tight">
                 {questions[currentQuestion].q}
               </h2>
 
+              {/* IMAGEM DA QUESTÃO (SE EXISTIR) */}
               {questions[currentQuestion].image && (
                 <img 
                   src={questions[currentQuestion].image} 
                   alt="Diagrama" 
-                  className="mb-8 rounded-lg border border-slate-600 max-w-full h-auto mx-auto shadow-lg bg-white p-2"
+                  className="mb-8 rounded-lg border border-slate-600 max-w-full h-auto mx-auto shadow-lg"
                 />
               )}
-
+              
+              {/* OPÇÕES */}
               <div className="space-y-4 text-left">
                 {questions[currentQuestion].options.map((opt, i) => (
                   <button 
