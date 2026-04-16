@@ -4,28 +4,352 @@ import imagemTap from './assets/dc.png';
 // --- BANCO DE DADOS UNIFICADO ---
 const quiz1 = [
   { 
-    id: 1, 
-    q: "Selecione a alternativa que contém o nome de cada perda do passivo (TAP):", 
-    image: imagemTap, 
-    options: ["A-Derivação; B-Inserção; C-Isolação", "A-Inserção; B-Isolação; C-Derivação", "A-Inserção; B-Derivação; C-Isolação", "A-Isolação; B-Inserção; C-Derivação"], 
-    ans: 2 
+    id: 28,
+    q: "O que é TILT?",
+    options: [
+      "Diferença de sinal entre portadoras distintas",
+      "Diferença entre frequências do canal direto e do canal de retorno",
+      "Nível de sinal de portadoras distintas",
+      "Nível de sinal do canal de retorno"
+    ],
+    ans: 0
   },
-  { id: 2, q: "Qual a finalidade da pingadeira?", options: ["Estética da instalação", "Reserva técnica", "Ocasionar infiltração", "Evitar infiltração de água através do cabo"], ans: 3 },
-  { id: 3, q: "Quais as partes que compõem um cabo de Fibra Óptica?", options: ["Capa protetora", "Núcleo", "Casca", "Todas as alternativas acima"], ans: 3 },
-  { id: 4, q: "O que é Canal Direto?", options: ["Sinal do cliente até o Headend", "Sinal entre clientes", "Sinal do Headend até o cliente", "Sinal entre Headends"], ans: 2 },
-  { id: 5, q: "Quais as faixas de frequência para o Canal de Retorno?", options: ["55 MHz a 750 MHz", "213 MHz a 550 MHz", "5 MHz a 55 MHz / 5 MHz a 104 MHz", "5 MHz a 42 MHz / 5 MHz a 85 MHz"], ans: 3 },
-  { id: 6, q: "O que é Upstream?", options: ["Sinal do eMTA para o medidor", "Sinal do eMTA para o CMTS", "Sinal do medidor para o eMTA", "Sinal do CMTS para o eMTA"], ans: 1 },
-  { id: 7, q: "Quais sinais trafegam no Canal Direto?", options: ["Canais Downstream", "Canais de Vídeo", "Canais piloto", "Todas as alternativas anteriores"], ans: 3 },
-  { id: 8, q: "O que é portabilidade?", options: ["Trocar fixo por móvel", "Manter número independente da operadora", "Trocar titular e número", "Nenhuma das anteriores"], ans: 1 },
-  { id: 9, q: "Técnico chega às 14:20 para agenda até 14:00. Qual indicador é afetado?", options: ["TEC1", "ISRA", "STFC", "SCM"], ans: 1 },
-  { id: 10, q: "Qual a função do CMTS?", options: ["Transmitir via upstream", "Comunicação e gerenciamento dos modems", "Interligar rede interna à HFC", "Gerar o VOIP"], ans: 1 },
-  { id: 11, q: "O que significa a sigla HFC?", options: ["Hybrid Fiber Coaxial", "High Frequency Connection", "Hybrid Frequency Control", "High Fiber Coaxial"], ans: 0 },
-  { id: 12, q: "Qual a função do Splitter (Divisor)?", options: ["Amplificar o sinal", "Dividir o sinal em saídas com mesma perda", "Bloquear frequências", "Converter sinal óptico"], ans: 1 },
-  { id: 13, q: "O que é SNR (Signal-to-Noise Ratio)?", options: ["Velocidade da internet", "Relação entre potência do sinal e ruído", "Tempo de resposta (ping)", "Voltagem do amplificador"], ans: 1 },
-  { id: 14, q: "O que indica um BER (Bit Error Rate) alto?", options: ["Conexão perfeita", "Perda de pacotes ou erros de transmissão", "Sinal muito forte", "Cabo desconectado"], ans: 1 },
-  { id: 15, q: "Qual a principal vantagem do DOCSIS 3.1?", options: ["Usa apenas cobre", "Velocidades Giga e blocos OFDM", "Funciona sem energia", "Apenas para TV analógica"], ans: 1 },
-  { id: 16, q: "O que caracteriza um curto-circuito no coaxial?", options: ["Malha encostando no condutor central", "Cabo muito comprido", "Conector sujo", "Sinal baixo"], ans: 0 },
-  { id: 17, q: "O que deve ser feito se houver ruído (Ingresso) no cliente?", options: ["Ignorar", "Instalar Filtro de Alta / Revisar conectores", "Aumentar transmissão do modem", "Trocar o cabo da rua"], ans: 1 },
+  {
+    id: 29,
+    q: "O que é uma Rede HFC?",
+    options: [
+      "Rede híbrida que mistura fibra óptica e cabo coaxial",
+      "Regiões atendidas pelas fibras ópticas",
+      "Rede heterogênea de fibra óptica e portadoras digitais",
+      "Regiões atendidas pelas fibras ópticas"
+    ],
+    ans: 0
+  },
+  {
+    id: 30,
+    q: "Qual é a largura de banda de um canal de TV digital?",
+    options: ["10 MHz", "42 MHz", "8 MHz", "6 MHz"],
+    ans: 2
+  },
+  {
+    id: 31,
+    q: "Assinale a alternativa correta em relação ao RX",
+    options: [
+      "Sinal que o CMTS recebe dos equipamentos alocados na casa do cliente",
+      "Sinal que os equipamentos alocados na casa do cliente recebem do CMTS"
+    ],
+    ans: 1
+  },
+  {
+    id: 32,
+    q: "Assinale a alternativa correta em relação ao CANAL DE RETORNO",
+    options: ["Todas as alternativas", "TX", "RX", "Canal Baixo", "Canal Alto"],
+    ans: 1
+  },
+  {
+    id: 33,
+    q: "Como é chamado o cabo da CLARO no cliente (TAP – CLIENTE RESIDENCIAL)?",
+    options: [
+      "Cabo Three Shield Branco RG06 (com mensageiro)",
+      "Cabo Drop (cabo preto RG06 com mensageiro)",
+      "Cabo Three Shield Branco (RG06 com mensageiro)",
+      "Cabo Drop (cabo preto RG11 com mensageiro)"
+    ],
+    ans: 1
+  },
+  {
+    id: 34,
+    q: "O gerenciamento e comunicação com os modems instalados nos clientes é realizado pelo?",
+    options: ["CMTS", "DOCSIS", "NODE", "Transceptor óptico"],
+    ans: 0
+  },
+  {
+    id: 35,
+    q: "DTMF é o padrão utilizado para:",
+    options: ["TV Digital", "Claro Virtua", "VOD (Video on Demand)", "Claro Net Fone"],
+    ans: 3
+  },
+  {
+    id: 36,
+    q: "Em uma instalação, ao usar ligação IN-TAP, qual o nome da perda que ocorre?",
+    options: ["Inserção", "Derivação", "Isolação"],
+    ans: 0
+  },
+  {
+    id: 37,
+    q: "Os modems recebem o sinal do CMTS através de qual canal?",
+    options: ["Canal de Retorno", "Canal Aberto", "Canal Fechado", "Canal Direto"],
+    ans: 3
+  },
+  {
+    id: 38,
+    q: "Quais sinais estavam fora do padrão quando o cliente estava RECEBENDO?",
+    options: ["Canal Baixo", "Todas as alternativas", "RX", "Canal Alto"],
+    ans: 1
+  },
+  {
+    id: 39,
+    q: "Os dois caminhos de comunicação entre modem e CMTS são:",
+    options: [
+      "Canal de Retorno e Upstream",
+      "Frequências Altas e Frequências Baixas",
+      "Canal Direto e Canal de Retorno",
+      "Canal Direto e Downstream"
+    ],
+    ans: 2
+  },
+  {
+    id: 40,
+    q: "Para evitar erros na distribuição de sinal é essencial:",
+    options: [
+      "Verificar a existência de tubulação",
+      "Medir os sinais no EMTA",
+      "Planejar a instalação de cada componente",
+      "Dar torque em todos os passivos instalados"
+    ],
+    ans: 2
+  },
+  {
+    id: 41,
+    q: "O padrão de transmissão de dados entre CMTS e Cable Modem é:",
+    options: ["256QAM", "DOCSIS", "DTMF", "Wireless"],
+    ans: 1
+  },
+  {
+    id: 42,
+    q: "Por que devemos cuidar para que o condutor central não sofra arranhões?",
+    options: [
+      "Não existe impacto",
+      "Apenas questão estética",
+      "Somente na fibra óptica",
+      "Porque a camada de cobre é bastante fina"
+    ],
+    ans: 3
+  },
+  {
+    id: 43,
+    q: "O cable modem fica na casa do cliente e interliga a rede interna à HFC",
+    options: ["Verdadeiro", "Falso"],
+    ans: 0
+  },
+  {
+    id: 44,
+    q: "A portadora transporta informações por meio de quais sinais?",
+    options: ["Rádio e Wi-Fi", "Pulso elétrico e Digital", "Analógico e Digital"],
+    ans: 2
+  },
+  {
+    id: 45,
+    q: "O que é Smart Card e qual sua função?",
+    options: [
+      "Cartão sem chip",
+      "Cartão com chip que controla as operações do decodificador",
+      "Controla velocidade de transmissão",
+      "Fecha o circuito do decodificador"
+    ],
+    ans: 1
+  },
+  {
+    id: 46,
+    q: "Em uma adesão Combo Mix HD, qual equipamento disponibiliza Virtua e Fone?",
+    options: ["Roteador", "Cable Modem", "eMTA", "Decodificador"],
+    ans: 2
+  },
+  {
+    id: 47,
+    q: "O que os indicadores medem?",
+    options: [
+      "Nível de satisfação do cliente",
+      "Padrão e qualidade nos serviços de instalação, AT e Rede Externa",
+      "Desempenho apenas dos técnicos próprios",
+      "Melhor parceira de prestação de serviço"
+    ],
+    ans: 1
+  }
+];
+
+const quiz1_1 = [
+  {
+    id: 48,
+    q: "Selecione a alternativa que contém corretamente o nome de cada perda do passivo",
+    image: imagemTap,
+    options: [
+      "A-Derivação; B-Inserção; C-Isolação",
+      "A-Inserção; B-Isolação; C-Derivação",
+      "A-Inserção; B-Derivação; C-Isolação",
+      "A-Isolação; B-Inserção; C-Derivação"
+    ],
+    ans: 2
+  },
+  {
+    id: 49,
+    q: "Em que faixa de frequência trabalham os sinais de CATV?",
+    options: ["THz", "GHz", "KHz", "MHz"],
+    ans: 3
+  },
+  {
+    id: 50,
+    q: "Qual a finalidade da pingadeira?",
+    options: [
+      "Apenas para deixar a estética da instalação ideal",
+      "Serve como reserva técnica caso o cliente queira mudar o local",
+      "Ocasionar infiltração de água na casa do cliente",
+      "Evitar que haja infiltração de água na casa do cliente através do cabo"
+    ],
+    ans: 3
+  },
+  {
+    id: 51,
+    q: "Quais as partes que compõem um cabo de Fibra Óptica?",
+    options: ["Todas as alternativas acima", "Capa protetora", "Núcleo", "Casca"],
+    ans: 0
+  },
+  {
+    id: 52,
+    q: "Em alta frequência, a corrente tende a migrar para a extremidade do condutor. Que fenômeno é esse?",
+    options: ["Efeito Skin", "Efeito Migratório", "Efeito Senoidal", "Efeito QuasiSquare"],
+    ans: 0
+  },
+  {
+    id: 53,
+    q: "O cliente possui uma TV LCD HD e um decoder HD. Qual opção permite imagem em alta definição?",
+    options: ["Cabo SPDIF", "Cabo Vídeo Componente", "Cabo HDMI", "Cabo S-VHS"],
+    ans: 2
+  },
+  {
+    id: 54,
+    q: "Qual a função do cable isolator?",
+    options: [
+      "Amplificar o sinal luminoso da fibra óptica",
+      "Proteger a instalação e os equipamentos da Claro contra picos de tensão e retorno de AC",
+      "Filtrar frequências acima de 350 MHz",
+      "Dividir os sinais elétricos em valores iguais"
+    ],
+    ans: 1
+  },
+  {
+    id: 55,
+    q: "Qual a função da Carga Casada?",
+    options: [
+      "Minimizar pirataria em equipamentos internos e externos",
+      "Adequação da rede, fazendo o casamento de impedância do circuito",
+      "Unir dois conectores ou cabos distintos",
+      "Proteger a instalação contra picos de tensão"
+    ],
+    ans: 1
+  },
+  {
+    id: 56,
+    q: "Qual é o significado de BER?",
+    options: ["Taxa de download", "Taxa de transferência de bit", "Taxa de erro de bit", "Taxa de relação sinal-ruído"],
+    ans: 2
+  },
+  {
+    id: 57,
+    q: "O Claro Fixo utiliza qual padrão de discagem?",
+    options: ["VoIP", "FSK", "DTMF ou TOM", "Pulse"],
+    ans: 2
+  },
+  {
+    id: 58,
+    q: "O que significa cabo Drop?",
+    options: [
+      "Cabo que conecta o eMTA ao computador",
+      "Cabo que liga o poste da companhia elétrica até o ponto de entrada da casa do cliente",
+      "Cabo do divisor até o equipamento da Claro",
+      "Cabo do decodificador até a TV"
+    ],
+    ans: 1
+  },
+  {
+    id: 59,
+    q: "Quais são os tipos de Modulação Digital utilizados na rede de cabos da Claro?",
+    options: ["QPSK e QAM", "QAM e XADSL", "QAM e TDM", "QPSK e TDM"],
+    ans: 0
+  },
+  {
+    id: 60,
+    q: "O que é FEC?",
+    options: [
+      "Código detector de sinal",
+      "Código detector de transmissão digital",
+      "Código detector e corretor de erros",
+      "Código detector de erro de bit"
+    ],
+    ans: 2
+  },
+  {
+    id: 61,
+    q: "O que é Canal Direto?",
+    options: [
+      "Sinal transmitido do cliente até o Headend",
+      "Sinal transmitido entre clientes da Claro",
+      "Sinal transmitido do Headend até o cliente",
+      "Sinal transmitido entre Headends"
+    ],
+    ans: 2
+  },
+  {
+    id: 62,
+    q: "Quais são as faixas de frequência do Canal de Retorno?",
+    options: [
+      "55 MHz a 750 MHz / 104 MHz a 1 GHz",
+      "213 MHz a 550 MHz / 85 MHz a 104 MHz",
+      "5 MHz a 55 MHz / 5 MHz a 104 MHz",
+      "5 MHz a 42 MHz / 5 MHz a 85 MHz"
+    ],
+    ans: 3
+  },
+  {
+    id: 63,
+    q: "O que é Upstream?",
+    options: [
+      "Sinal que o eMTA envia para o medidor",
+      "Sinal que o eMTA envia para o CMTS",
+      "Sinal que o medidor envia para o eMTA",
+      "Sinal que o CMTS envia para o eMTA"
+    ],
+    ans: 1
+  },
+  {
+    id: 64,
+    q: "Quais sinais trafegam no Canal Direto?",
+    options: [
+      "Canais Downstream",
+      "Todas as alternativas anteriores",
+      "Canais de Vídeo",
+      "Canais piloto (alto e baixo)"
+    ],
+    ans: 1
+  },
+  {
+    id: 65,
+    q: "O que é portabilidade?",
+    options: [
+      "Trocar número fixo por móvel",
+      "N.D.A",
+      "Manter número independentemente da operadora, mesmo com titulares diferentes",
+      "Manter o número fixo ou móvel independentemente da operadora"
+    ],
+    ans: 3
+  },
+  {
+    id: 66,
+    q: "Se o cliente agenda das 11:00 às 14:00 e o técnico chega 14:20, qual indicador é afetado?",
+    options: ["TEC1", "ISRA", "STFC", "SCM"],
+    ans: 1
+  },
+  {
+    id: 67,
+    q: "Qual a função do CMTS?",
+    options: [
+      "Concentrar dados da internet para transmitir via upstream ao cable modem",
+      "Fazer a comunicação e o gerenciamento dos modems",
+      "Interligar a rede interna à rede HFC",
+      "Interligar a rede de telefonia à internet (VoIP)"
+    ],
+    ans: 1
+  }
 ];
 
 const quiz2 = [
@@ -42,13 +366,16 @@ const quiz2 = [
 ];
 
 export default function App() {
-  const [selectedQuiz, setSelectedQuiz] = useState(null); // null, 'quiz1' ou 'quiz2'
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
-  // Define qual lista de questões usar
-  const questions = selectedQuiz === 'quiz1' ? quiz1 : quiz2;
+  // Mapeia a seleção para o banco de dados correto
+  const questions = 
+    selectedQuiz === 'quiz1' ? quiz1 : 
+    selectedQuiz === 'quiz1_1' ? quiz1_1 : 
+    quiz2;
 
   const handleAnswer = (index) => {
     if (index === questions[currentQuestion].ans) setScore(score + 1);
@@ -81,6 +408,12 @@ export default function App() {
               🚀 Simulado 1 (Básico/HFC)
             </button>
             <button 
+              onClick={() => setSelectedQuiz('quiz1_1')}
+              className="w-full bg-slate-700 hover:bg-green-600 p-6 rounded-xl border border-slate-600 font-bold transition-all"
+            >
+              🚀 Simulado 1.1 (Básico/HFC)
+            </button>
+            <button 
               onClick={() => setSelectedQuiz('quiz2')}
               className="w-full bg-slate-700 hover:bg-blue-600 p-6 rounded-xl border border-slate-600 font-bold transition-all"
             >
@@ -102,7 +435,7 @@ export default function App() {
             <div className="flex justify-between items-center mb-4">
               <button onClick={resetAll} className="text-sm text-slate-400 hover:text-white">← Voltar</button>
               <h1 className="text-xl font-bold text-blue-400">
-                {selectedQuiz === 'quiz1' ? 'Simulado 1' : 'Simulado 2'}
+                {selectedQuiz === 'quiz1' ? 'Simulado 1' : selectedQuiz === 'quiz1_1' ? 'Simulado 1.1' : 'Simulado 2'}
               </h1>
               <span className="text-xs font-mono bg-blue-900/50 px-2 py-1 rounded">
                 {currentQuestion + 1} / {questions.length}
